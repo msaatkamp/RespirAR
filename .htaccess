@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+# Process all files as PHP by default
+DefaultType application/x-httpd-php
+# Fix sub-directory requests by allowing 'index' as a DirectoryIndex value
+DirectoryIndex index index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+Options +FollowSymLinks
+RewriteRule api/co/(.*)/temp/(.*)/umid/(.*)/data/(.*)/hora/(.*)/ api.php?co=$1&temp=$2&umid=$3&data=$4&hora=$5
+RewriteRule api/co/(.*)/temp/(.*)/umid/(.*)/data/(.*)/hora/(.*) api.php?co=$1&temp=$2&umid=$3&data=$4&hora=$5
+</IfModule>
